@@ -4,6 +4,7 @@ import API
 import location
 import state
 import time
+import os
 
 MAZE_WIDTH = 16
 MAZE_HEIGHT = 16
@@ -213,14 +214,29 @@ def load_solved(sol):
             turn_left()
         move_forward()
 
+def banner():
+        os.system('clear')
+        banner = r'''                                                
+ ____        _         _____         _           
+|    \ ___ _| |___ ___|     |___ ___| |_ ___ _ _ 
+|  |  | . | . | . | -_| | | | . |   | '_| -_| | |
+|____/|___|___|_  |___|_|_|_|___|_|_|_,_|___|_  |
+              |___|                         |___|                                                                                                                                     
+'''
 
 def main():
-    log("Running...")
+    log(" ____        _         _____         _ ")
+    log("|    \ ___ _| |___ ___|     |___ ___| |_ ___ _ _ ")
+    log("|  |  | . | . | . | -_| | | | . |   | '_| -_| | |")
+    log("|____/|___|___|_  |___|_|_|_|___|_|_|_,_|___|_  |")
+    log("              |___|                         |___|")
+    log("Running..." )
     start = time.time()
     GPS()  
     set_dir(0) 
     end = time.time() 
-    log("Navigation Completed within "+ str(end-start) + " seconds" )      
+    log("Maze Solved within "+ str(end-start) + " seconds" )    
+    end = time.time()  
     solution = solve()  
     load_solved(solution) 
     end1 = time.time()  

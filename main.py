@@ -29,7 +29,7 @@ def direction_update(turn_direction):
     global cur_direction 
     cur_direction = (cur_direction + turn_direction) % 4
 
-def get_walls():
+def wall_check():
     walls = [False, False, False, False]
     walls[cur_direction] = API.wallFront() 
     walls[(cur_direction + 1) % 4] = API.wallRight() 
@@ -117,7 +117,7 @@ def GPS():
     cur_loc = maze[cur_position[0]][cur_position[1]]  
     if not cur_loc.visited:  
         cur_loc.set_visited(True)  
-        cur_loc.set_walls(get_walls())  
+        cur_loc.set_walls(wall_check())  
         spoted_maze(cur_position)  
         
         if not cur_loc.walls[0] and not maze[cur_position[0]][cur_position[1] + 1].visited:
@@ -218,11 +218,13 @@ def main():
     log("Running...")
     start = time.time()
     GPS()  
-    set_dir(0)      
+    set_dir(0) 
+    end = time.time() 
+    log("Navigation Completed within "+ str(end-start) + " seconds" )      
     solution = solve()  
     load_solved(solution) 
-    end = time.time()  
-    log("Completedt Within "+ str(end-start) + " seconds" ) 
+    end1 = time.time()  
+    log("Exit Path Travelled within "+ str(end1-end) + " seconds" ) 
 
 
 if __name__ == "__main__":
